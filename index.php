@@ -41,20 +41,18 @@ $works = [
         "сompleted" => false,
     ],
 ];
-
 function task_list($works, $categories)
 {
     $count = 0;
     foreach ($works as $work) {
         if ($categories == $work["category"]) {
-               return $work["category"];
+                $count++;
         }
-        return $count;
         
-       
+        
     }
+    return $count;
 }
-
 ?>
 <!DOCTYPE html>
 <html lang="ru">
