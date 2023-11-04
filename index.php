@@ -3,42 +3,42 @@
 $show_complete_tasks = rand(0, 1);
 $categories = ['Входящие', 'Учеба', 'Работа', 'Домашние дела', 'Авто'];
 
-$work = [
+$works = [
     [
-        "title" => "2014 Rossignol District Snowboard",
-        "project" => "Доски и лыжи",
-        "price" => 10999,
-        "image" => "img/lot-1.jpg"
+        "title" => "Собеседование в IT компании",
+        "date" => "01.12.2019",
+        "category" => "Работа",
+        "сompleted" => false,
     ],
     [
-        "title" => "DC Ply Mens 2016/2017 Snowboard",
-        "project" => "Доски и лыжи",
-        "price" => 159999,
-        "image" => "img/lot-2.jpg"
+        "title" => "Выполнить тестовое задание",
+        "date" => "25.12.2019",
+        "category" => "Работа",
+        "сompleted" => false,
     ],
     [
-        "title" => "Крепления Union Contact Pro 2015 года размер L/XL",
-        "project" => "Крепления",
-        "price" => 8000,
-        "image" => "img/lot-3.jpg"
+        "title" => "Сделать задание первого раздела",
+        "date" => "21.12.2019",
+        "category" => "Учеба",
+        "сompleted" => true,
     ],
     [
-        "title" => "Ботинки для сноуборда DC Mutiny Charocal",
-        "project" => "Ботинки",
-        "price" => 10999,
-        "image" => "img/lot-4.jpg"
+        "title" => "Встреча с другом",
+        "date" => "22.12.2019",
+        "category" => "Входящие",
+        "сompleted" => false,
     ],
     [
-        "title" => "Куртка для сноуборда DC Mutiny Charocal",
-        "project" => "Одежда",
-        "price" => 7500,
-        "image" => "img/lot-5.jpg"
+        "title" => "Купить корм для кота",
+        "date" => "null",
+        "category" => "Домашние дела",
+        "сompleted" => false,
     ],
     [
-        "title" => "Маска Oakley Canopy",
-        "project" => "Разное",
-        "price" => 5400,
-        "image" => "img/lot-6.jpg"
+        "title" => "Заказать пиццу",
+        "date" => "null",
+        "category" => "Домашние дела",
+        "сompleted" => false,
     ],
 ]
 
@@ -83,10 +83,12 @@ $work = [
 
                     <nav class="main-navigation">
                         <ul class="main-navigation__list">
-                            <li class="main-navigation__list-item">
-                                <a class="main-navigation__list-item-link" href="#">Название проекта</a>
-                                <span class="main-navigation__list-item-count">0</span>
-                            </li>
+                            <?php foreach ($categories as $categorie) : ?>
+                                <li class="main-navigation__list-item">
+                                    <a class="main-navigation__list-item-link" href="#"><?= $categorie ?></a>
+                                    <span class="main-navigation__list-item-count">0</span>
+                                </li>
+                            <?php endforeach; ?>
                         </ul>
                     </nav>
 
@@ -118,35 +120,28 @@ $work = [
                     </div>
 
                     <table class="tasks">
-                        <tr class="tasks__item task">
-                            <td class="task__select">
-                                <label class="checkbox task__checkbox">
-                                    <input class="checkbox__input visually-hidden task__checkbox" type="checkbox" value="1">
-                                    <span class="checkbox__text">Сделать главную страницу Дела в порядке</span>
-                                </label>
-                            </td>
 
-                            <td class="task__file">
-                                <a class="download-link" href="#">Home.psd</a>
-                            </td>
+                        <?php foreach ($works as $work) : ?>
+                            <tr class="tasks__item task<?php if ($work['сompleted']) : ?>task--completed<?php endif; ?>">
 
-                            <td class="task__date"></td>
-                        </tr>
-                        <!--показывать следующий тег <tr/>, если переменная $show_complete_tasks равна единице-->
-                        <?php if ($show_complete_tasks == 1) : ?>
-                            <tr class="tasks__item task task--completed">
-                                <td class="task__select">
-                                    <label class="checkbox task__checkbox">
-                                        <input class="checkbox__input visually-hidden" type="checkbox" checked>
-                                        <span class="checkbox__text">Записаться на интенсив "Базовый PHP"</span>
-                                    </label>
-                                </td>
-                                <td class="task__date">10.10.2019</td>
+                                <?php if ($work['сompleted'] && $show_complete_tasks == 0) : continue; ?><?php else: ?>
+                                        <td class="task__select">
+                                            <label class="checkbox task__checkbox">
+                                                <input class="checkbox__input visually-hidden task__checkbox" type="checkbox" value="1">
+                                                <span class="checkbox__text"><?= $work['title'] ?></span>
+                                            </label>
+                                        </td>
+        
+                                        <td class="task__file">
+                                            <a class="download-link" href="#"><?= $work['category'] ?></a>
+                                        </td>
+                                        <td class="task__date"><?= $work['date'] ?></td>
+                                    </tr>
+                                    <!--показывать следующий тег <tr/>, если переменная $show_complete_tasks равна единице-->
+                                <?php endif; ?>
 
-                                <td class="task__controls">
-                                </td>
-                            </tr>
-                        <?php endif; ?>
+                        <?php endforeach; ?>
+
                     </table>
                 </main>
             </div>
@@ -213,3 +208,4 @@ $work = [
 </body>
 
 </html>
+
