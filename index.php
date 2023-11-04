@@ -40,7 +40,20 @@ $works = [
         "category" => "Домашние дела",
         "сompleted" => false,
     ],
-]
+];
+
+function task_list($works, $categories)
+{
+    $count = 0;
+    foreach ($works as $work) {
+        if ($categories == $work["category"]) {
+               return $work["category"];
+        }
+        return $count;
+        
+       
+    }
+}
 
 ?>
 <!DOCTYPE html>
@@ -86,7 +99,7 @@ $works = [
                             <?php foreach ($categories as $categorie) : ?>
                                 <li class="main-navigation__list-item">
                                     <a class="main-navigation__list-item-link" href="#"><?= $categorie ?></a>
-                                    <span class="main-navigation__list-item-count">0</span>
+                                    <span class="main-navigation__list-item-count"><?= task_list($works, $categorie) ?></span>
                                 </li>
                             <?php endforeach; ?>
                         </ul>
@@ -124,23 +137,23 @@ $works = [
                         <?php foreach ($works as $work) : ?>
                             <tr class="tasks__item task<?php if ($work['сompleted']) : ?>task--completed<?php endif; ?>">
 
-                                <?php if ($work['сompleted'] && $show_complete_tasks == 0) : continue; ?><?php else: ?>
-                                        <td class="task__select">
-                                            <label class="checkbox task__checkbox">
-                                                <input class="checkbox__input visually-hidden task__checkbox" type="checkbox" value="1">
-                                                <span class="checkbox__text"><?= $work['title'] ?></span>
-                                            </label>
-                                        </td>
-        
-                                        <td class="task__file">
-                                            <a class="download-link" href="#"><?= $work['category'] ?></a>
-                                        </td>
-                                        <td class="task__date"><?= $work['date'] ?></td>
-                                    </tr>
-                                    <!--показывать следующий тег <tr/>, если переменная $show_complete_tasks равна единице-->
-                                <?php endif; ?>
+                                <?php if ($work['сompleted'] && $show_complete_tasks == 0) : continue; ?><?php else : ?>
+                                <td class="task__select">
+                                    <label class="checkbox task__checkbox">
+                                        <input class="checkbox__input visually-hidden task__checkbox" type="checkbox" value="1">
+                                        <span class="checkbox__text"><?= $work['title'] ?></span>
+                                    </label>
+                                </td>
 
-                        <?php endforeach; ?>
+                                <td class="task__file">
+                                    <a class="download-link" href="#"><?= $work['category'] ?></a>
+                                </td>
+                                <td class="task__date"><?= $work['date'] ?></td>
+                            </tr>
+                            <!--показывать следующий тег <tr/>, если переменная $show_complete_tasks равна единице-->
+                        <?php endif; ?>
+
+                    <?php endforeach; ?>
 
                     </table>
                 </main>
@@ -208,4 +221,3 @@ $works = [
 </body>
 
 </html>
-
