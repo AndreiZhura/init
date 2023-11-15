@@ -1,6 +1,6 @@
 <?php
-
-require("/templates/layout");
+$content = require("templates/main.php");
+require("templates/layout.php");
 // показывать или нет выполненные задачи
 $show_complete_tasks = rand(0, 1);
 $categories = ['Входящие', 'Учеба', 'Работа', 'Домашние дела', 'Авто'];
