@@ -16,18 +16,18 @@ function task_list($works, $categories)
 function difference_in_time($works)
 {
 
+    date_default_timezone_set('Europe/Moscow');
     $ny_date = strtotime("now");
 
-    date_default_timezone_set('Europe/Moscow');
-        $one = strtotime($works);
+        $date_work = strtotime($works);
 
-        $diff =  $one - $ny_date;
+        $diff =  $date_work - $ny_date;
         $number = floor($diff /3600);
-        if($number == "null")
+        if($date_work == false)
         {
             return 2;
         }
-        if ($number > -24 ) {
+        if ($number < 24 ) {
            
             return 1;
         } 
