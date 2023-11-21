@@ -12,4 +12,28 @@ function task_list($works, $categories)
     return $count;
 }
 
+
+function difference_in_time($works)
+{
+
+    $ny_date = strtotime("now");
+
+    date_default_timezone_set('Europe/Moscow');
+        $one = strtotime($works);
+
+        $diff =  $one - $ny_date;
+        $number = floor($diff /3600);
+        if($number == "null")
+        {
+            return 2;
+        }
+        if ($number > -24 ) {
+           
+            return 1;
+        } 
+         else {
+            return 2;
+        }
+    
+}
 ?>
